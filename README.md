@@ -1,0 +1,2 @@
+# WorkAnalysisTool
+Android端末から作業項目を入力した結果をGoogleスプレッドシート保存するシステム
