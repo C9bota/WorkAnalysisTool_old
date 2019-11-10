@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WorkAnarisysTool_android</string>
+    <string name="send">Button</string>
+    <string name="send_button">スプレッドシートに送信</string>
+</resources>
