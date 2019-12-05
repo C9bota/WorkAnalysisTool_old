@@ -47,7 +47,12 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends Activity
         implements EasyPermissions.PermissionCallbacks {
+    //すべてのパーミッションが通らないと起動しないようにする
+
+    //googleアカウントを使う際の資格
     GoogleAccountCredential mCredential;
+
+    //UI部品
     private TextView mOutputText;
     private Button mCallApiButton;
     ProgressDialog mProgress;
@@ -68,6 +73,8 @@ public class MainActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //UIを作る
         LinearLayout activityLayout = new LinearLayout(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -87,6 +94,7 @@ public class MainActivity extends Activity
             public void onClick(View v) {
                 mCallApiButton.setEnabled(false);
                 mOutputText.setText("");
+                //API呼び出し
                 getResultsFromApi();
                 mCallApiButton.setEnabled(true);
             }
@@ -115,14 +123,6 @@ public class MainActivity extends Activity
     }
 
 
-
-    /**
-     * Attempt to call the API, after verifying that all the preconditions are
-     * satisfied. The preconditions are: Google Play Services installed, an
-     * account was selected and the device currently has online access. If any
-     * of the preconditions are not satisfied, the app will prompt the user as
-     * appropriate.
-     */
     /**
      * すべての前提条件が満たされていることを確認した後、APIの呼び出しを試みます。
      * 前提条件は次のとおりです。
@@ -134,26 +134,19 @@ public class MainActivity extends Activity
      */
     private void getResultsFromApi() {
         if (! isGooglePlayServicesAvailable()) {
+            //GooglePlayServicesがあるかどうかの確認
             acquireGooglePlayServices();
         } else if (mCredential.getSelectedAccountName() == null) {
+            //使用するアカウントの選択
             chooseAccount();
         } else if (! isDeviceOnline()) {
             mOutputText.setText("No network connection available.");
         } else {
+            //全てのチェックが通ったら
             new MakeRequestTask(mCredential).execute();
         }
     }
 
-    /**
-     * Attempts to set the account used with the API credentials. If an account
-     * name was previously saved it will use that one; otherwise an account
-     * picker dialog will be shown to the user. Note that the setting the
-     * account to use with the credentials object requires the app to have the
-     * GET_ACCOUNTS permission, which is requested here if it is not already
-     * present. The AfterPermissionGranted annotation indicates that this
-     * function will be rerun automatically whenever the GET_ACCOUNTS permission
-     * is granted.
-     */
     /**
      * API資格情報で使用されるアカウントを設定しようとします。
      * アカウント名が以前に保存されていた場合、そのアカウント名が使用されます。
@@ -188,19 +181,13 @@ public class MainActivity extends Activity
         }
     }
 
-    /**
-     * Called when an activity launched here (specifically, AccountPicker
-     * and authorization) exits, giving you the requestCode you started it with,
-     * the resultCode it returned, and any additional data from it.
-     * @param requestCode code indicating which activity result is incoming.
-     * @param resultCode code indicating the result of the incoming
-     *     activity result.
-     * @param data Intent (containing result data) returned by incoming
-     *     activity result.
-     */
+
     /**
      * ここで起動されたアクティビティ（具体的にはAccountPickerと承認）が終了すると呼び出され、
-     * 開始したrequestCode、返されたresultCode、およびそこからの追加データを提供します。 @param requestCodeコード。受信するアクティビティ結果を示します。 着信アクティビティ結果の結果を示す@param resultCodeコード。 着信アクティビティの結果によって返される@param data Intent（結果データを含む）。
+     * 開始したrequestCode、返されたresultCode、およびそこからの追加データを提供します。
+     * @param requestCodeコード。受信するアクティビティ結果を示します。
+     * 着信アクティビティ結果の結果を示す@param resultCodeコード。
+     * 着信アクティビティの結果によって返される@param data Intent（結果データを含む）。
      */
     @Override
     protected void onActivityResult(
@@ -240,14 +227,16 @@ public class MainActivity extends Activity
         }
     }
 
+
     /**
-     * Respond to requests for permissions at runtime for API 23 and above.
-     * @param requestCode The request code passed in
-     *     requestPermissions(android.app.Activity, String, int, String[])
-     * @param permissions The requested permissions. Never null.
-     * @param grantResults The grant results for the corresponding permissions
-     *     which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
+     * *実行時のAPI 23以降のアクセス許可のリクエストに応答します。
+     * @ param requestCode渡されたリクエストコード
+     *   requestPermissions（android.app.Activity、String、int、String []）
+     * @param permissions要求された権限。 決してヌル。
+     * @param grantResults PERMISSION_GRANTEDまたはPERMISSION_DENIEDのいずれかである、
+     *                     対応する権限の付与結果。 決してヌル。
      */
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -257,25 +246,13 @@ public class MainActivity extends Activity
                 requestCode, permissions, grantResults, this);
     }
 
-    /**
-     * Callback for when a permission is granted using the EasyPermissions
-     * library.
-     * @param requestCode The request code associated with the requested
-     *         permission
-     * @param list The requested permission list. Never null.
-     */
+
     @Override
     public void onPermissionsGranted(int requestCode, List<String> list) {
         // Do nothing.
     }
 
-    /**
-     * Callback for when a permission is denied using the EasyPermissions
-     * library.
-     * @param requestCode The request code associated with the requested
-     *         permission
-     * @param list The requested permission list. Never null.
-     */
+
     @Override
     public void onPermissionsDenied(int requestCode, List<String> list) {
         // Do nothing.
