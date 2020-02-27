@@ -1,5 +1,8 @@
 package com.example.mdd.wa_uiprototype;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +13,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class MainActivity extends AppCompatActivity {
 
     //Ui
@@ -19,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
 //
     private RadioGroup[] radioGroups = new RadioGroup[3];
     private TextView[] textViews = new TextView[3];
+
+    //CSV用
+    private static final String COMMA = ",";
+    private static final String NEW_LINE = "\r\n";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +74,37 @@ public class MainActivity extends AppCompatActivity {
                         Log.v("チェック済み",textgp + " " + textbt);
                     }
                 }
+
+                writeToCSVFile();
             }
         });
+    }
+
+    void writeToCSVFile(){
+        try{
+            //出力先の作成
+            Context context = this;
+            FileWriter fw = new FileWriter(Environment.getDataDirectory().getPath()+"/test.csv",false);
+            PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
+
+            //内容を指定する
+            pw.print("あ");
+            pw.print(",");
+            pw.print("い");
+            pw.println();
+
+            pw.print("01");
+            pw.print(",");
+            pw.print("02");
+            pw.println();
+
+            //ファイルに書き出す
+            pw.close();
+
+            //終了メッセージを画面に出力する
+            System.out.println("出力が完了しました。");
+       } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 }
