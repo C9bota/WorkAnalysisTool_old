@@ -2,7 +2,9 @@ package com.example.mdd.wa_uiprototype;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Debug;
 import android.os.Environment;
+import android.provider.Contacts;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,35 +15,38 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Ui
-//    private RadioGroup rg1;
-//    private RadioGroup rg2;
-//    private RadioGroup rg3;
-//
     private RadioGroup[] radioGroups = new RadioGroup[3];
     private TextView[] textViews = new TextView[3];
+    private TextView textReturn;
+    private TextView textCSVData;
 
     //CSV用
     private static final String COMMA = ",";
     private static final String NEW_LINE = "\r\n";
+    private static final String FILE_NAME = "test.csv";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        rg1 = findViewById(R.id.radioGroup1);
-//        rg2 = findViewById(R.id.radioGroup2);
-//        rg3 = findViewById(R.id.radioGroup3);
 
         radioGroups[0] = findViewById(R.id.radioGroup1);
         radioGroups[1] = findViewById(R.id.radioGroup2);
@@ -51,20 +56,13 @@ public class MainActivity extends AppCompatActivity {
         textViews[1] = findViewById(R.id.textView2);
         textViews[2] = findViewById(R.id.textView3);
 
+        textReturn = findViewById(R.id.textViewReturn);
+        textCSVData = findViewById(R.id.textViewData);
 
         Button btn = findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //radio groupらの値を拾ってくる
-//                int checkedId = rg1.getCheckedRadioButtonId();
-//                if(checkedId != -1){
-//                    RadioButton radioButton = findViewById(checkedId);
-//                    TextView textView = findViewById(R.id.textView);
-//                    String textgp = textView.getText().toString();
-//                    String textbt = radioButton.getText().toString();
-//                    Log.v("チェック済み",textgp + " " + textbt);
-//                }
 
                 String datastr = "";
                 for(int i=0; i<radioGroups.length; i++){
@@ -75,71 +73,65 @@ public class MainActivity extends AppCompatActivity {
                         String textgp = textViews[i].getText().toString();
                         String textbt = radioButton.getText().toString();
                         datastr += textbt;
-                        //Log.v("チェック済み",textgp + " " + textbt);
+                        if(i<radioGroups.length-1){
+                            datastr += COMMA;
+                        }else{
+                            datastr += NEW_LINE;
+                        }
                     }
                 }
-
-                //writeToCSVFile();
-                //writeToCSVFile2();
-                writeToCSVFile3("項目１,項目２,項目3\n");
-                writeToCSVFile3(datastr);
+                writeToCSVFile(datastr);
             }
         });
     }
 
-    void writeToCSVFile(){
-        try{
-            //出力先の作成
-            Context context = this;
-            FileWriter fw = new FileWriter(Environment.getDataDirectory().getPath()+"/test.csv",false);
-            PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
 
-            //内容を指定する
-            pw.print("あ");
-            pw.print(",");
-            pw.print("い");
-            pw.println();
-
-            pw.print("01");
-            pw.print(",");
-            pw.print("02");
-            pw.println();
-
-            //ファイルに書き出す
-            pw.close();
-
-            //終了メッセージを画面に出力する
-            System.out.println("出力が完了しました。");
-       } catch (IOException ex){
-            ex.printStackTrace();
-        }
-    }
-
-    void writeToCSVFile2(){
-        try {
-            FileOutputStream fileOutputStream = openFileOutput("test.csv", Context.MODE_PRIVATE);
-            fileOutputStream.write("a,b,c".getBytes());
-            fileOutputStream.flush();
-            fileOutputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    void writeToCSVFile3(String writedata){
+    void writeToCSVFile(String writedata){
         FileOutputStream fos = null;
+        FileInputStream fis = null;
+        Calendar writeTime = Calendar.getInstance(Locale.JAPAN);
+        SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd_hh:mm:ss");
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+
+        //書き込み
+        String writeTimeStr = sdf.format(writeTime.getTime());
         try {
-            fos = openFileOutput("test.csv", Context.MODE_PRIVATE);
-            fos.write(writedata.getBytes());
+            fos = openFileOutput(FILE_NAME,Context.MODE_APPEND);
+            fis = openFileInput(FILE_NAME);
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(fis, StandardCharsets.UTF_8));
+
+            Log.d("writeCSV", ("ファイルの一行目は"+reader.readLine()));
+            if((reader.readLine()) == null){
+                Log.d("writeCSV","中身が空っぽだよね");
+                fos.write(("日時"+COMMA+"項目１"+COMMA+"項目２"+COMMA+"項目３"+NEW_LINE).getBytes());
+            }
+            fos.write((writeTimeStr + COMMA + writedata).getBytes());
             fos.flush();
             fos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException e){
             e.printStackTrace();
         }
+        //読み出し
+        try {
+            fis = openFileInput(FILE_NAME);
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(fis, StandardCharsets.UTF_8));
+            String str ="";
+            while(reader.readLine() != null){
+                str += reader.readLine() +"\n";
+                textCSVData.setText(str);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
         Log.d("write","書き込み完了:" + writedata);
+        textReturn.setText("書き込みが完了しました " + writedata);
     }
 }
