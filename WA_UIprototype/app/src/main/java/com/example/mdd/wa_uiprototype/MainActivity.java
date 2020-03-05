@@ -14,6 +14,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 //                    Log.v("チェック済み",textgp + " " + textbt);
 //                }
 
+                String datastr = "";
                 for(int i=0; i<radioGroups.length; i++){
                     int checkedId = radioGroups[i].getCheckedRadioButtonId();
                     if(checkedId != -1){
@@ -71,11 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
                         String textgp = textViews[i].getText().toString();
                         String textbt = radioButton.getText().toString();
-                        Log.v("チェック済み",textgp + " " + textbt);
+                        datastr += textbt;
+                        //Log.v("チェック済み",textgp + " " + textbt);
                     }
                 }
 
-                writeToCSVFile();
+                //writeToCSVFile();
+                //writeToCSVFile2();
+                writeToCSVFile3("項目１,項目２,項目3\n");
+                writeToCSVFile3(datastr);
             }
         });
     }
@@ -106,5 +113,33 @@ public class MainActivity extends AppCompatActivity {
        } catch (IOException ex){
             ex.printStackTrace();
         }
+    }
+
+    void writeToCSVFile2(){
+        try {
+            FileOutputStream fileOutputStream = openFileOutput("test.csv", Context.MODE_PRIVATE);
+            fileOutputStream.write("a,b,c".getBytes());
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void writeToCSVFile3(String writedata){
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput("test.csv", Context.MODE_PRIVATE);
+            fos.write(writedata.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.d("write","書き込み完了:" + writedata);
     }
 }
