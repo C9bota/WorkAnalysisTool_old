@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         textViewCSV = findViewById(R.id.text_view_output);
 
-        writeToCSVFile();
+        //writeToCSVFile();
         readFromCSVFile();
     }
 
-    
+
     //読み出し全般
     public final String FILE_NAME = "test.csv";
     void readFromCSVFile(){
