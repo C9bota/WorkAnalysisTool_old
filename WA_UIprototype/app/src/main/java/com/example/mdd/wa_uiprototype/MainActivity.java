@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         textViews[2] = findViewById(R.id.textView3);
 
         textReturn = findViewById(R.id.textViewReturn);
+
+        //出力用
         textCSVData = findViewById(R.id.textViewData);
 
         Button btn = findViewById(R.id.button);
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //データをUIから拾うい集めdatastrに格納
                 String datastr = "";
                 for(int i=0; i<radioGroups.length; i++){
                     int checkedId = radioGroups[i].getCheckedRadioButtonId();
@@ -81,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 writeToCSVFile(datastr);
+
+                readFromCSVFile();
             }
         });
     }
@@ -114,7 +119,14 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e){
             e.printStackTrace();
         }
+
+        Log.d("write","書き込み完了:" + writedata);
+        textReturn.setText("書き込みが完了しました " + writedata);
+    }
+
+    void readFromCSVFile(){
         //読み出し
+        FileInputStream fis;
         try {
             fis = openFileInput(FILE_NAME);
             BufferedReader reader = new BufferedReader(
@@ -131,7 +143,5 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.d("write","書き込み完了:" + writedata);
-        textReturn.setText("書き込みが完了しました " + writedata);
     }
 }
