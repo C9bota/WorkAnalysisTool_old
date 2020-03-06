@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -21,12 +22,14 @@ import java.nio.charset.StandardCharsets;
 
 public class OutputFragment extends Fragment {
 
-//    private TextView textViewCSV;
+    TextView textViewCSV;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_output, container, false);
-//        textViewCSV = v.findViewById(R.id.text_view_output);
+        //FrameLayout v = (FrameLayout) inflater.inflate(R.layout.fragment_output, container, false);
+        //textViewCSV = v.findViewById(R.id.text_view_output);
+        //textViewCSV = getView().findViewById(R.id.text_view_output);
 //        readFromCSVFile();
         return v;
     }
