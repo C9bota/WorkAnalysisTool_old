@@ -3,4 +3,25 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string-array name="class_list">
+        <item>りんご組</item>
+        <item>さくら組</item>
+        <item>いるか組</item>
+    </string-array>
+    
+    <string-array name="teacher_name">
+        <item>久保田</item>
+        <item>西山</item>
+        <item>加藤</item>
+        <item>大和田</item>
+    </string-array>
+
+    <string-array name="child_name">
+        <item>ももこ</item>
+        <item>はると</item>
+        <item>だいき</item>
+        <item>ゆうき</item>
+        <item>ゆみ</item>s
+    </string-array>
 </resources>
