@@ -14,248 +14,287 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
                 android:entries="@array/teacher_name"
+
                 android:spinnerMode="dialog" />
 
             <Spinner
                 android:id="@+id/spinner2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="58dp"
                 android:entries="@array/class_list" />
 
             <Spinner
                 android:id="@+id/spinner3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="59dp"
                 android:entries="@array/child_name"
                 android:spinnerMode="dialog" />
 
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="排便" />
+
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="排便" />
 
                 <RadioButton
                     android:id="@+id/radioButton"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="良い" />
+                    android:text="良い"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="普通" />
+                    android:text="普通"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="悪い" />
+                    android:text="悪い"
+                    android:textSize="36dp" />
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="食事" />
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="食事" />
 
                 <RadioButton
                     android:id="@+id/radioButton10"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="良い" />
+                    android:text="良い"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton11"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="普通" />
+                    android:text="普通"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton12"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="悪い" />
+                    android:text="悪い"
+                    android:textSize="36dp" />
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="体調：午前" />
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="体調：午前" />
 
                 <RadioButton
                     android:id="@+id/radioButton4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="良い" />
+                    android:text="良い"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton5"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="普通" />
+                    android:text="普通"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton6"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="悪い" />
+                    android:text="悪い"
+                    android:textSize="36dp" />
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="体調：午後" />
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+               >
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="体調：午後" />
 
                 <RadioButton
                     android:id="@+id/radioButton7"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="良い" />
+                    android:text="良い"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton8"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="普通" />
+                    android:text="普通"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton9"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="悪い" />
+                    android:text="悪い"
+                    android:textSize="36dp" />
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="遊びの様子" />
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="遊びの様子" />
 
                 <RadioButton
                     android:id="@+id/radioButton11-1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="良い" />
+                    android:text="良い"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton11-2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="普通" />
+                    android:text="普通"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton11-3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="悪い" />
+                    android:text="悪い"
+                    android:textSize="36dp" />
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="学習の様子" />
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="学習の様子" />
 
                 <RadioButton
                     android:id="@+id/radioButton13"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="良い" />
+                    android:text="良い"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton14"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="普通" />
+                    android:text="普通"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton15"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="悪い" />
+                    android:text="悪い"
+                    android:textSize="36dp" />
 
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="保護者からのクレーム" />
+
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="保護者からのクレーム" />
 
                 <RadioButton
                     android:id="@+id/radioButton16"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="あり" />
+                    android:text="あり"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton17"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="なし" />
+                    android:text="なし"
+                    android:textSize="36dp" />
 
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="振り返り"
+                />
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="振り返り" />
 
                 <RadioButton
                     android:id="@+id/radioButton21"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="良い" />
+                    android:text="良い"
+                    android:textSize="36dp" />
 
                 <RadioButton
                     android:id="@+id/radioButton22"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="悪い" />
+                    android:text="悪い"
+                    android:textSize="36dp" />
 
             </RadioGroup>
 
@@ -263,7 +302,8 @@
                 android:id="@+id/button_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="確定" />
+                android:text="確定"
+                android:textSize="36dp" />
 
             <Space
                 android:layout_width="match_parent"
